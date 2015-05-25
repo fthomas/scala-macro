@@ -6,7 +6,7 @@ import scala.reflect.macros.blackbox.Context
 object Macro {
   def foo[N](implicit aux: Witness.Aux[N]): Unit = macro fooImpl[N]
 
-  def fooImpl[N: c.WeakTypeTag](c: Context)(aux: c.Expr[Witness.Lt[N]]): c.Expr[Unit] = {
+  def fooImpl[N: c.WeakTypeTag](c: Context)(aux: c.Expr[Witness.Aux[N]]): c.Expr[Unit] = {
     import c.universe._
 
     val typechecked = aux.tree

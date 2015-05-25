@@ -3,7 +3,7 @@ import org.scalacheck.Properties
 
 class MacroSpec extends Properties("MacroSpec") {
   property("") = secure {
-    val w = shapeless.Witness(42)
+    val w = shapeless.Witness(true)
     Macro.foo[w.T]
     true
   }
