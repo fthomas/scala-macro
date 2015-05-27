@@ -17,6 +17,10 @@ object Macro {
     println("Untypechecked tree:")
     println(show(untypechecked))
 
+    val retypechecked = c.typecheck(untypechecked)
+    println("Retypechecked tree:")
+    println(show(retypechecked))
+
     def eval = c.eval(c.Expr(untypechecked))
     scala.util.Try(eval).getOrElse(eval)
 
