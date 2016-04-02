@@ -1,6 +1,6 @@
 name := "scala-macro"
 
-scalaVersion := "2.11.6"
+scalaVersion := "2.11.8"
 scalacOptions ++= Seq(
   "-deprecation",
   "-encoding", "UTF-8",
@@ -18,6 +18,6 @@ scalacOptions ++= Seq(
 
 libraryDependencies ++= Seq(
   "org.scala-lang" % "scala-compiler" % scalaVersion.value,
-  "com.chuusai" %% "shapeless" % "2.2.0-RC6",
-  "org.scalacheck" %% "scalacheck" % "1.12.3" % "test"
+  "com.chuusai" %% "shapeless" % "2.3.0",
+  "org.scalacheck" %% "scalacheck" % "1.13.0" % "test"
 )
