@@ -7,7 +7,7 @@ object ConcatSpec extends Properties("ConcatSpec") {
   property("Concat[ab, cd]") = secure {
     val c = Concat[W.`"ab"`.T, W.`"cd"`.T]
 
-    val s1: c.Out = "abcd" // Ok
+    val s1: c.Out = "abcd"
 
     //val s2: c.Out = "abc"
     /*
@@ -30,7 +30,7 @@ object ConcatSpec extends Properties("ConcatSpec") {
 
     //val s2: abc.Out = "xyz"
     /*
-    [error] /home/frank/data/code/scala-macro/src/test/scala/ConcatSpec.scala:31: type mismatch;
+    [error] scala-macro/src/test/scala/ConcatSpec.scala:31: type mismatch;
     [error]  found   : String("xyz")
     [error]  required: abc.Out
     [error]     (which expands to)  String("abc")
@@ -39,5 +39,25 @@ object ConcatSpec extends Properties("ConcatSpec") {
     */
 
     s1 ?= "abc"
+  }
+
+  property("Concat[Concat[a, b], Concat[c, d]]") = secure {
+    val ab = Concat[W.`"a"`.T, W.`"b"`.T]
+    val cd = Concat[W.`"c"`.T, W.`"d"`.T]
+    val abcd = Concat[ab.Out, cd.Out]
+
+    val s1: abcd.Out = "abcd"
+
+    //val s2: abcd.Out = "xyz"
+    /*
+    [error] scala-macro/src/test/scala/ConcatSpec.scala:51: type mismatch;
+    [error]  found   : String("xyz")
+    [error]  required: abcd.Out
+    [error]     (which expands to)  String("abcd")
+    [error]     val s2: abcd.Out = "xyz"
+    [error]                        ^
+    */
+
+    s1 ?= "abcd"
   }
 }
