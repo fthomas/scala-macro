@@ -21,4 +21,23 @@ object ConcatSpec extends Properties("ConcatSpec") {
 
     s1 ?= "abcd"
   }
+
+  property("Concat[a, Concat[b, c]]") = secure {
+    val bc = Concat[W.`"b"`.T, W.`"c"`.T]
+    val abc = Concat[W.`"a"`.T, bc.Out]
+
+    val s1: abc.Out = "abc"
+
+    //val s2: abc.Out = "xyz"
+    /*
+    [error] /home/frank/data/code/scala-macro/src/test/scala/ConcatSpec.scala:31: type mismatch;
+    [error]  found   : String("xyz")
+    [error]  required: abc.Out
+    [error]     (which expands to)  String("abc")
+    [error]     val s2: abc.Out = "xyz"
+    [error]                       ^
+    */
+
+    s1 ?= "abc"
+  }
 }

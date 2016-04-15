@@ -18,6 +18,9 @@ object Concat {
     def stringOf(tpe: Type): String =
       tpe match {
         case ConstantType(Constant(a)) => a.asInstanceOf[String]
+        case TypeRef(_, sym, _) => sym.info match {
+          case ConstantType(Constant(a)) => a.asInstanceOf[String]
+        }
         case _ => c.abort(c.enclosingPosition, s"Cannot extract String from $tpe")
       }
 
